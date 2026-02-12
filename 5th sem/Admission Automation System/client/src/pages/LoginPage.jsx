@@ -29,7 +29,8 @@ export default function LoginPage({ onLogin }) {
 
     // onLogin(data.student);
 
-    navigate("/otp-login");
+    // navigate("/otp-login");
+    navigate("/dashboard");
   } catch (err) {
     alert("Server error ❌");
   }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDoList</title>
+ <style>
+  body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(223, 222, 222);
+  }
+  .container{  
+  padding: 30px;
+    background-color: white;
+  }
+  h2{
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+  }
+  #inputBox{
+    width: 350px;
+    padding: 5px;
+    background-color: rgb(223, 222, 222);
+    color: grey;
+    font-size: 20px;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+  #inputBox:focus{
+    border: 2px solid blue;
+  }
+  #add{
+    margin-left: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    outline: none;
+    padding: 5px;
+    width: 90px;
+    border-radius: 3px;
+    outline: none;
+    background-color: green;
+  }
+   #list-container {
+    margin-top: 20px;
+  }
+  .item-list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+  }
+  .item{
+    font-size: 25px;
+    margin-top: 8px;
+  }
+.remove{
+  margin-left: 10px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    outline: none;
+    padding: 5px;
+    width: 90px;
+    border-radius: 3px;
+    outline: none;
+    background-color: brown;
+}
+ </style>
+</head>
+<body>
+  <div class="container">
+    <h2>To Do List</h2>
+    <div>
+      <form action="">
+      <input type="text" placeholder="Enter your work" id="inputBox">
+        <button type="button" id="add" >Add</button>
+      </form>
+    </div>
+     <div id="list-container">
+    </div>
+  </div>
+  <script>
+    const inputVal = document.querySelector("#inputBox");
+    const listContainer = document.querySelector("#list-container");
+    const items = [];
+    const addBtn = document.querySelector("#add");
+     addBtn.addEventListener('click',()=>{
+      const newItem = inputVal.value;
+      if(newItem){
+      console.log(newItem);
+      items.push(newItem);
+      inputVal.value = ""
+      renderItems();
+      }
+       else {
+        console.log("Input is empty, nothing to add.");
+      } 
+    })
+function renderItems(){
+  listContainer.innerHTML = " ";
+
+  items.forEach((itemText, index) => {
+  const itemDiv = document.createElement("div");
+  itemDiv.className = "item-list";
+
+  const itemPara = document.createElement("p");
+  itemPara.className = "item";
+  itemPara.textContent  = itemText;
+
+  const removeButton = document.createElement("button");
+  removeButton.className = "remove"
+  removeButton.textContent  = "Remove"
+
+  removeButton.dataset.index = index
+  
+  itemDiv.appendChild(itemPara);
+  itemDiv.appendChild(removeButton);
+
+  listContainer.appendChild(itemDiv)
+  });
+}
+    
+  listContainer.addEventListener('click' ,(event) =>{
+    if(event.target.classList.contains('remove')){
+      const indexToRemove = parseInt(event.target.dataset.index);
+      items.splice(indexToRemove,1);
+      renderItems();
+    }
+  });
+  </script>
+</body>
+</html>
