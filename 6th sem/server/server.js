@@ -3,14 +3,14 @@ import os, { freemem, platform } from 'os';
 let body="";
 let data = [];
 const server = http.createServer((req,res)=>{
- const url = req.url;
- if(url=="/" && req.method=="GET"){
+//  const req.url = req.req.url;
+ if(req.url=="/" && req.method=="GET"){
   res.end("<h1>Home Page</h1>");
- }else if(url=="/about" && req.method=="GET"){
+ }else if(req.url=="/about" && req.method=="GET"){
   res.end("<h1>About Page</h1>");
- }else if(url=="/contact" && req.method=="GET"){
+ }else if(req.url=="/contact" && req.method=="GET"){
   res.end("<h1>Contact Page</h1>");
- }else if(url=="/senddata" && req.method=="POST"){
+ }else if(req.url=="/senddata" && req.method=="POST"){
   req.on("data",(chunk)=>{
     body += chunk;
   })
@@ -20,7 +20,7 @@ const server = http.createServer((req,res)=>{
     body="";
     res.end(data+"data recived");
   })
- }else if(url=="/viewdata" && req.method=="GET"){
+ }else if(req.url=="/viewdata" && req.method=="GET"){
   const sysdata={
     platform:os.platform(),
     arch:os.arch(),
