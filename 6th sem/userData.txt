@@ -1,0 +1,14 @@
+{
+  "name" :"Pratibha",
+  "rollNo" : 189,
+  "email":"pratibha@gmail.com"
+}{
+  "name" :"Radhika",
+  "rollNo" : 196,
+  "email":"radhika@gmail.com"
+}
+{
+  "name" :"Ritu",
+  "rollNo" : 185,
+  "email":"ritu@gmail.com"
+}
