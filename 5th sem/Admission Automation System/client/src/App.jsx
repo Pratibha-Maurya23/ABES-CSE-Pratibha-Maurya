@@ -15,13 +15,15 @@ import AdmissionFormPage from "./pages/AdmissionFormPage";
 import PaymentPage from "./pages/PaymentPage";
 import OtpLogin from "./pages/OtpLogin";
 
+import { API_URL } from "./config";
+
 function App() {
   const [currentStudent, setCurrentStudent] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // ✅ restore session on refresh
   useEffect(() => {
-  fetch("http://localhost:8000/me", {
+  fetch(`${API_URL}/me`, {
     credentials: "include",
   })
     .then((res) => {
@@ -39,7 +41,7 @@ function App() {
 
 
     const handleLogout = async () => {
-    await fetch("http://localhost:8000/logout", {
+    await fetch(`${API_URL}/logout`, {
       method: "POST",
       credentials: "include",
     });

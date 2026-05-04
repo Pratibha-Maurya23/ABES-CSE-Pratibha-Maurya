@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FileText, Upload} from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 export default function AdmissionFormPage({ onNavigate }) {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ const handleSubmit = async (e) => {
 
 
   try {
-    const res = await fetch("http://localhost:8000/admission", {
+    const res = await fetch(`${API_URL}/admission`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(studentData),

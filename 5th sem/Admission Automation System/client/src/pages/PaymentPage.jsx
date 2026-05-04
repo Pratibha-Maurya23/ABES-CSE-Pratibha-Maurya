@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { CreditCard, CheckCircle } from "lucide-react";
 import { useState } from "react";
+import { API_URL } from "../config";
 
 export default function PaymentPage() {
   const { studentId } = useParams();
@@ -10,7 +11,7 @@ export default function PaymentPage() {
   const handlePayment = async () => {
   setLoading(true);
   try {
-    const res = await fetch("http://localhost:8000/payment", {
+    const res = await fetch(`${API_URL}/payment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

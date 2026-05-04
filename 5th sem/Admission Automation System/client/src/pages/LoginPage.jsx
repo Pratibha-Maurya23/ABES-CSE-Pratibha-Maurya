@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 export default function LoginPage({ onLogin }) {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function LoginPage({ onLogin }) {
 
  const handleLogin = async () => {
   try {
-    const res = await fetch("http://localhost:8000/login", {
+    const res = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -38,7 +39,7 @@ export default function LoginPage({ onLogin }) {
 
   const handleForgotPassword = async () => {
     try {
-      const res = await fetch("http://localhost:8000/forgot-password", {
+      const res = await fetch(`${API_URL}/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ admissionNo, newPassword }),

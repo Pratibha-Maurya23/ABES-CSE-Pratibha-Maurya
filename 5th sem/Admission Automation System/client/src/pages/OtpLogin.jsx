@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 export default function OtpLogin({ onLogin }) {
   const [phone, setPhone] = useState("");
@@ -32,7 +33,7 @@ useEffect(() => {
   try {
     setError("");
 
-    const res = await fetch("http://localhost:8000/send-otp", {
+    const res = await fetch(`${API_URL}/send-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ phone }),
@@ -60,7 +61,7 @@ useEffect(() => {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:8000/verify-otp", {
+      const res = await fetch(`${API_URL}/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

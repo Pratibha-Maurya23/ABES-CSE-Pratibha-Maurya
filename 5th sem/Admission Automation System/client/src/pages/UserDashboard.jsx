@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FileText, Mail, Phone, MapPin, Calendar, BookOpen, Award } from 'lucide-react';
+import { API_URL } from '../config';
 
 export default function UserDashboard({ student }) {
   const navigate = useNavigate();
@@ -128,7 +129,7 @@ export default function UserDashboard({ student }) {
               ✅ Payment Completed</span>
                  <div className="mt-3">
         <a
-          href={`http://localhost:8000/receipt/${student._id}`}
+          href={`${API_URL}/receipt/${student._id}`}
           className="text-blue-600 underline font-medium"
           target="_blank"
           rel="noreferrer"
