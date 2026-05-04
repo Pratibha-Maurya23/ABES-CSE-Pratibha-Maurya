@@ -10,14 +10,29 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: "http://localhost:5173", 
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
 
 app.use(express.json());
+
+app.set("trust proxy", 1); // For deployment proxies like Render/Heroku
+
+const isProduction = process.env.NODE_ENV === "production";
 
 app.use(
   session({
@@ -30,8 +45,8 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: false, 
-      sameSite: "lax",// 1 hour
+      secure: isProduction, 
+      sameSite: isProduction ? "none" : "lax",// 1 hour
     },
   })
 );

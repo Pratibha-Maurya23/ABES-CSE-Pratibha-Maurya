@@ -44,7 +44,7 @@ authRoutes.post("/admission", async (req, res) => {
       console.log("DEV MESSAGE:");
       console.log(`Admission No: ${admissionNo}`);
       console.log(`Password: ${plainPassword}`);
-    }
+    } else {
       await client.messages.create({
         from: `whatsapp:${process.env.TWILIO_PHONE}`,
         to: `whatsapp:+91${student.phone}`,
@@ -52,6 +52,7 @@ authRoutes.post("/admission", async (req, res) => {
              Admission No: ${admissionNo}
              Password: ${plainPassword}`,
       });
+    }
 
     res.json({ studentId: student._id, message: "Admission successful" });
   } catch (err) {
@@ -217,12 +218,13 @@ authRoutes.post("/send-otp", async (req, res) => {
     if (!process.env.TWILIO_SID || !process.env.TWILIO_AUTH) {
       console.log("DEV OTP:", otp);
       return res.json({ message: "OTP sent (dev mode)" });
-    }
+    } else {
       await client.messages.create({
         from: `whatsapp:${process.env.TWILIO_PHONE}`,
         to: `whatsapp:+91${phone}`,
         body: `Your OTP for login is ${otp}. Valid for 5 minutes.`,
       });
+    }
 
     res.json({ message: "OTP sent ✅" });
   } catch (err) {
