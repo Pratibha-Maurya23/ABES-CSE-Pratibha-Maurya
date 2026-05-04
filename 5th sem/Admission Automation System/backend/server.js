@@ -11,7 +11,9 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-  "https://admission-automation-system.vercel.app/",
+  "http://localhost:5174",
+  "https://admission-automation-system.vercel.app",
+  process.env.FRONTEND_URL,
 ].filter(Boolean);
 
 app.use(
